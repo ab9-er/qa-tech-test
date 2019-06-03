@@ -45,6 +45,19 @@ BDD frameworks are great, but are they always appropriate? You decide.
 ## Submit your test
 Once completed push the solution up to your own repository and link ECS the url along with run instructions.
 
+## Running the test
+Make sure you have pipenv installed. (https://docs.pipenv.org/en/latest/)
+
+Make sure Chromedriver is installed and added to your PATH (Easiest way to install chromedriver is either through brew or npm).
+
+Once they are installed and the application under test is running, run the following,
+
+```
+make build-test run-test
+```
+
+The result should be printed in the terminal.
+
 ## Note
 Please stick to contributing from one account, it makes you look better.
 
