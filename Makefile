@@ -12,3 +12,12 @@ build-test:
 
 run-test:
 	pipenv run python src/test/e2e/solution.py
+
+stop-app:
+	docker stop ecsd-tech-test
+
+full-run:
+	@make stop-app
+	./build.sh
+	./run.sh
+	@make run-test

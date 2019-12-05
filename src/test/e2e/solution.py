@@ -1,4 +1,9 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+from selenium.common import TimeoutException
+
 
 
 def solve_challenge():
@@ -9,6 +14,10 @@ def solve_challenge():
     driver.get("http://localhost")
 
     driver.find_element_by_css_selector("[data-test-id='render-challenge']").click()
+
+    element = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".challenge tr"))
+    )
 
     rows = driver.find_elements_by_css_selector(".challenge tr")
 
@@ -33,6 +42,22 @@ def solve_challenge():
 
         print(_i) if INDEX_FOUND else print(None)
         print("\n" + "-" * 30 + "\n")
+
+        driver.find_element_by_css_selector("[data-test-id='submit-{}']".format(rows.index(row) + 1)).send_keys(_i)
+
+    driver.find_element_by_css_selector("[data-test-id='submit-4']").send_keys("Abhinav")
+
+    driver.find_element_by_css_selector("[data-test-id='submitButton']").click()
+
+    try:
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "[data-test-id='close-dialog']"))
+        )
+        print('\n\nSUCCESS!!')
+    except TimeoutException:
+        print('\n\nFAIL!')
+    finally:
+        driver.quit()
 
 if __name__ == "__main__":
     solve_challenge()

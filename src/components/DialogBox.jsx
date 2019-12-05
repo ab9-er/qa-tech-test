@@ -19,6 +19,7 @@ export default class DialogBox extends React.Component {
   render() {
     const actions = [
       <FlatButton
+        data-test-id={"close-dialog"}
         label="Close"
         primary
         onClick={this.props.handleClose}
